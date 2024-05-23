@@ -29,6 +29,17 @@ library(tidyverse)
 ```{r}
 #| label: load-dataset
 #| message: false
+
+english_education <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-01-23/english_education.csv')
+
+#The dataset I plan on using is from the UK office of national statistics and has data about eductation attianment based for multiple towns and cites. We can see the dimensions of the the data below as well as the name of the columns by running the below code.
+
+names(english_education)
+
+#For my first question I plan on see if there is any relation between town size and if there is a university present on the percentage of please that decided to pursue apprenticeships vs employment or higher education. The variables I will use for this will be. The town names, size flags, university present, I will create a column that will look at all the activity at 19 columns and find the percentage that falls into the apprenticeship category. 
+
+#For my second question I will look to see if we can find a relationship between costal/non costal cities and their population with if there is a universtiy present in those cities. I will do this with town names, costal detailed, and unveristy present. 
+
 ```
 
 A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
@@ -39,6 +50,10 @@ Make sure to load the data and use inline code for some of this information.
 
 The two questions you want to answer.
 
-## Analysis plan
+For my first question I plan on see if there is any relation between town size and if there is a university present on the percentage of please that decided to pursue apprenticeships vs employment or higher education. The variables I will use for this will be. The town names, size flags, university present, I will create a column that will look at all the activity at 19 columns and find the percentage that falls into the apprenticeship category.
+
+For my second question I will look to see if we can find a relationship between costal/non costal cities and their population with if there is a university present in those cities. I will do this with town names, costal detailed, and university present.
+
+Analysis plan
 
 -   A plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any).
