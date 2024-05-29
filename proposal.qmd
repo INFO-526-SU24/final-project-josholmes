@@ -61,3 +61,18 @@ Analysis plan
 -   For question one - I need to normalize the 19-year-old in Apprenticeships to population as we would expect that towns with a high population would have larger number of 19-year old. To normalize this I will sum all the activity at 19-years and then find the percentage of that number that are in apprenticeships. This will be our Y-axis. Our x-axis will be if their is a university present. Then I will have the regions set colors.
 
 -   For question two - I will created a 3D scatter plot with the following variables. X-axis will be income, Y-axis will be job Density and the Z-axis will be Education score. I will also add color to the education score to add a heat map effect to clearing distinguish where we are seeing high educational scores.
+
+Plan of Attack
+
+|                                       |           |            |           |                                               |
+|---------------------------------------|-----------|------------|-----------|-----------------------------------------------|
+| Task Name                             | Status    | Due        | Priority  | Summary                                       |
+| Draft Proposal For Peer Reveiw        | Complete  | 5/25/2024  | High      | Submit Proposal                               |
+| Submit Proposal For Peer Review       | Complete  | 5/29/2024  | High      | Submit Proposal                               |
+| Review Peer Review Feedback           | Incomplte | 5/29/2004  | High      | Review issues for peer reveiw                 |
+| Address Peer Review Feedbak           | Incomplte | 06/03/2024 | High      | Make changes based on peer review             |
+| Sumbit Proposal For Instructer Review | Incomplte | 06/03/2024 | High      | Submit Proposal with changes from peer review |
+| Draft Write-Up                        | Incomplte | 06/15/2024 | High      | Get a draft down of the write up              |
+| Finailize Write-UP                    | Incomplte | 06/24/2024 | High      | Finialize and submit the final write-up       |
+| Draft Presentation                    | Incomplte | 06/15/2024 | High      | Get a draft of the presentation               |
+| Finalize Presentation                 | Incomplte | 06/24/2024 | High      | Finialize and submit the presentation         |
