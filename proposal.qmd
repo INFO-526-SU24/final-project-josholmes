@@ -81,7 +81,7 @@ unique(english_education$university_flag)
 Plan of Attack
 
 |                                        |            |            |          |                                               |
-|--------------|--------------|--------------|--------------|----------------|
+|----------------------------------------|------------|------------|----------|-----------------------------------------------|
 | Task Name                              | Status     | Due        | Priority | Summary                                       |
 | Draft Proposal For Peer Review         | Complete   | 5/25/2024  | High     | Submit Proposal                               |
 | Submit Proposal For Peer Review        | Complete   | 5/29/2024  | High     | Submit Proposal                               |

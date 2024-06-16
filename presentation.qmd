@@ -1,7 +1,7 @@
 ---
-title: "Project title"
+title: "How the presence of universities and  impact the number of young adults in apprenticeship."
 subtitle: "INFO 526 - Summer 2024 - Final Project"
-author: "Author names"
+author: "Joshua Holmes"
 title-slide-attributes:
   data-background-image: images/watercolour_sys02_img34_teacup-ocean.jpg
   data-background-size: stretch
@@ -50,6 +50,8 @@ data(mtcars)
 mtcars$speed <- mtcars$hp / mtcars$wt
 
 data("penguins")
+
+edu_data <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-01-23/english_education.csv')
 ```
 
 # Using Quarto for presentations
@@ -163,3 +165,141 @@ Limitations:
 -   You are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
 
 -   But some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs.
+
+## Introducing our Data Set
+
+Educational attainment of young people in English towns
+
+-   The data set contains 1104 rows and 31 columns
+
+-   Data set contains information related to towns, population, regional information, coastal classification, job density, income, university presence, and education attainment statistics
+
+## Why I Chose the Data Set
+
+-   It was the first data set that upon reviewing I could immediately envisioned multiple visuals that could be created around the data set
+
+-   I saw that the data contained
+
+    -   If universities where present
+
+    -   How many 19 year olds were in apprenticeships
+
+-   I suspected that a greater percentage would attend apprenticeships in towns where universities weren't present
+
+-   I wanted to see if I was correct
+
+## Question
+
+-   Had two variables; university presence, 19 year olds in apprenticeships
+
+-   Needed a third variable so I added in region
+
+## Region / University Data
+
+-   colmun name: rgn11nm
+
+```{r}
+unique(edu_data$rgn11nm)
+```
+
+-   colmun name: university_flag
+
+```{r}
+unique(edu_data$university_flag)
+```
+
+## 19 Year Olds In Apprenticeships
+
+-   column name: activity_at_age_19
+
+-   multiple columns - Need to make sure the data is normalized based on town populations and can be compared between towns
+
+-   Data is the percentage of the 2012/2013 cohort that is in apprenticeship so it is already normalized to factor for town population
+
+```{r}
+edu_data |> 
+  select(starts_with("activity")) |>
+  names()
+```
+
+## Organizing Data
+
+-   Organizing and removing "NA" values from our data set
+
+    -   select(activity_at_age_19_appprenticeships, rgn11nm, university_flag)
+
+    -   na.omit()
+
+```{r}
+
+edu_data <- edu_data |> select(activity_at_age_19_appprenticeships, rgn11nm, university_flag) |> na.omit() 
+
+glimpse(edu_data)
+```
+
+## Creating GGplot - geom_point
+
+```{r}
+
+ggplot(edu_data, aes(x = university_flag, y = activity_at_age_19_appprenticeships, color = rgn11nm)) +
+  geom_point(size = 1) +
+  labs(title = "Percentage of 19-year-olds in Apprenticeships by University Presence and Region",
+       x = "University Presence",
+       y = "Percentage of Apprenticeships",
+       color = "Region") +
+  theme_minimal()
+
+```
+
+## Interpenetration of Geom_point
+
+-   Looks like there is a higher percentage of 19 years in apprenticeships in town with no university
+
+-   Looks like the North East and North West have higher numbers of aprrenticeships
+
+-   Geom_point doesn't tell use much about the distribution so we'll create a box pot to see the distribution
+
+## Creating ggplot - Boxplot
+
+```{r}
+ggplot(edu_data, aes(x = university_flag, y = activity_at_age_19_appprenticeships, fill = rgn11nm)) +
+  geom_boxplot() +
+  labs(title = "Distribution of Apprenticeships by University Presence and Region",
+       x = "University Presence",
+       y = "Percentage of Apprenticeships",
+       fill = "Region") +
+  theme_minimal()
+```
+
+## Interpreting the Box Plot
+
+-   Looks like the North East and North West have higher median of 19-year olds in apprenticeships in towns without universities
+
+-   The distributions of 19-year olds in apprenticeship is more spread out in towns with no university and more consolidated in towns with universities
+
+-   The North West contains the town with the highest number fo 19-years old in apprenticeships but they are outliers. The median for the North West is behind the North East
+
+-   The North East does not contain the towns with the highest percentage of 19-year olds in apprenticeships but the region has the highest median of 19 year-olds in apprenticeships for both towns with universities present and towns without universities
+
+-    A lot of data clustered together wanted to create a graph that shows the same data but not so congested together
+
+## Creating ggplot - Boxplot - Facet_Grid
+
+```{r}
+
+ggplot(edu_data, aes(y = activity_at_age_19_appprenticeships, fill = rgn11nm)) +
+  geom_boxplot() +
+  facet_grid(vars(university_flag),vars(rgn11nm),labeller = labeller(rgn11nm = label_wrap_gen(10)))+
+  labs(title = "Distribution of Apprenticeships by University Presence and Region",
+       x = "",
+       y = "Percentage of Apprenticeships",
+       fill = "Region") +
+  theme_minimal()+
+  theme(
+    legend.position = "null",
+    axis.text.x = element_blank()
+  
+  )
+
+
+```
