@@ -1,5 +1,5 @@
 ---
-title: "How the presence of universities and  impact the number of young adults in apprenticeship."
+title: "Apprenticeship by Geographical Region and University Presence."
 subtitle: "INFO 526 - Summer 2024 - Final Project"
 author: "Joshua Holmes"
 title-slide-attributes:
@@ -22,7 +22,8 @@ execute:
 
 # Load packages here
 pacman::p_load(tidymodels,
-               tidyverse)
+               tidyverse,
+               here)
 
 ```
 
@@ -46,125 +47,10 @@ knitr::opts_chunk$set(
 #| label: load-data
 #| include: false
 # Load data here
-data(mtcars)
-mtcars$speed <- mtcars$hp / mtcars$wt
 
-data("penguins")
 
-edu_data <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-01-23/english_education.csv')
+edu_data <- read_csv(here("data", "edudata.csv"))
 ```
-
-# Using Quarto for presentations
-
-## Quarto
-
--   The presentation is created using the Quarto CLI
-
--   `##` sets the start of a new slide
-
-## Layouts
-
-You can use plain text
-
-::: columns
-::: {.column width="40%"}
--   or bullet points[^1]
-:::
-
-::: {.column width="60%"}
-or in two columns
-:::
-:::
-
-[^1]: And add footnotes
-
--   like
-
--   this
-
-## Code
-
-```{r, echo=FALSE}
-model <- lm(mpg ~ speed, data = mtcars) 
-
-model |> tidy()
-
-model |> glance()
-
-```
-
-## Plots
-
-```{r}
-penguins |>
-  mutate(species = ifelse(species == "Adelie", "Adelie", "Other")) |>
-  ggplot(aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
-  geom_point()
-```
-
-## Plot and text
-
-::: columns
-::: {.column width="50%"}
--   Some text
-
--   goes here
-:::
-
-::: {.column width="50%"}
-```{r, warning=FALSE, fig.width=5.5}
-penguins |>
-  ggplot(aes(x = bill_length_mm, y = species, color = species)) +
-  geom_boxplot(linewidth = 0.75,
-               outlier.size = 2.5) +
-  theme_minimal(base_size = 15) +
-  theme(legend.key.size = unit(0.8, "cm"))
-```
-:::
-:::
-
-# A new section...
-
-## Tables
-
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
-
-```{r}
-penguins |> 
-  head() |>
-  kableExtra::kable() |>
-  kableExtra::kable_styling()
-```
-
-## Images
-
-![Image credit: Danielle Navarro, Percolate.](images/watercolour_sys02_img34_teacup-ocean.png){fig-align="center" width="500"}
-
-## Math Expressions {.smaller}
-
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. \$\\alpha+\\beta\$ renders $\alpha + \beta$. You can use the display style with double dollar signs:
-
-```         
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-```
-
-$$
-\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i
-$$
-
-Limitations:
-
-1.  The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
-
-2.  There should not be spaces after the opening `$` or before the closing `$`.
-
-# Wrap up
-
-## Feeling adventurous?
-
--   You are welcomed to use the default styling of the slides. In fact, that's what I expect majority of you will do. You will differentiate yourself with the content of your presentation.
-
--   But some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs.
 
 ## Introducing our Data Set
 
@@ -176,7 +62,7 @@ Educational attainment of young people in English towns
 
 ## Why I Chose the Data Set
 
--   It was the first data set that upon reviewing I could immediately envisioned multiple visuals that could be created around the data set
+-   It was the first data set that upon reviewing I immediately though of a question
 
 -   I saw that the data contained
 
@@ -186,15 +72,13 @@ Educational attainment of young people in English towns
 
 -   I suspected that a greater percentage would attend apprenticeships in towns where universities weren't present
 
--   I wanted to see if I was correct
-
 ## Question
 
 -   Had two variables; university presence, 19 year olds in apprenticeships
 
 -   Needed a third variable so I added in region
 
-## Region / University Data
+## Data
 
 -   colmun name: rgn11nm
 
@@ -208,18 +92,10 @@ unique(edu_data$rgn11nm)
 unique(edu_data$university_flag)
 ```
 
-## 19 Year Olds In Apprenticeships
-
 -   column name: activity_at_age_19
 
--   multiple columns - Need to make sure the data is normalized based on town populations and can be compared between towns
-
--   Data is the percentage of the 2012/2013 cohort that is in apprenticeship so it is already normalized to factor for town population
-
 ```{r}
-edu_data |> 
-  select(starts_with("activity")) |>
-  names()
+glimpse(edu_data$activity_at_age_19_appprenticeships)
 ```
 
 ## Organizing Data
@@ -251,14 +127,6 @@ ggplot(edu_data, aes(x = university_flag, y = activity_at_age_19_appprenticeship
 
 ```
 
-## Interpenetration of Geom_point
-
--   Looks like there is a higher percentage of 19 years in apprenticeships in town with no university
-
--   Looks like the North East and North West have higher numbers of aprrenticeships
-
--   Geom_point doesn't tell use much about the distribution so we'll create a box pot to see the distribution
-
 ## Creating ggplot - Boxplot
 
 ```{r}
@@ -270,18 +138,6 @@ ggplot(edu_data, aes(x = university_flag, y = activity_at_age_19_appprenticeship
        fill = "Region") +
   theme_minimal()
 ```
-
-## Interpreting the Box Plot
-
--   Looks like the North East and North West have higher median of 19-year olds in apprenticeships in towns without universities
-
--   The distributions of 19-year olds in apprenticeship is more spread out in towns with no university and more consolidated in towns with universities
-
--   The North West contains the town with the highest number fo 19-years old in apprenticeships but they are outliers. The median for the North West is behind the North East
-
--   The North East does not contain the towns with the highest percentage of 19-year olds in apprenticeships but the region has the highest median of 19 year-olds in apprenticeships for both towns with universities present and towns without universities
-
--    A lot of data clustered together wanted to create a graph that shows the same data but not so congested together
 
 ## Creating ggplot - Boxplot - Facet_Grid
 
@@ -303,3 +159,13 @@ ggplot(edu_data, aes(y = activity_at_age_19_appprenticeships, fill = rgn11nm)) +
 
 
 ```
+
+## Conclusion
+
+-   North East and North West regions have higher median of 19-year olds in apprenticeships
+
+-   The distribution spread of 19-year olds in apprenticeship is greater in towns with no university and more consolidated in towns with universities
+
+-   The North West contains the towns with the highest precentage of 19-years olds in apprenticeships but they are outliners.
+
+-   The North East region has the highest median number of 19-year olds in apprenticeships
