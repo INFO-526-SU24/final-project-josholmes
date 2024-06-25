@@ -17,6 +17,33 @@ execute:
   echo: false
 ---
 
+```{r}
+#| label: setup
+#| include: false
+
+# Plot theme
+ggplot2::theme_set(ggplot2::theme_minimal(base_size = 11))
+
+# For better figure resolution
+knitr::opts_chunk$set(
+  fig.retina = 3, 
+  dpi = 300, 
+  fig.width = 6, 
+  fig.asp = 0.618 
+  )
+
+
+```
+
+```{r}
+#| label: load-data
+#| include: false
+# Load data here
+
+
+edu_data <- read_csv(here("data", "edudata.csv"))
+```
+
 ## Abstract
 
 Add project abstract here.
@@ -25,10 +52,39 @@ Introduction:
 
 This project utilizes the dataset from the week of January 23, 2024 on the TidyTuesdayR website. This dataset  focuses on the educational attainment of young people in English towns. Provided by the UK Office for National Statistics, this dataset explores why children and young people in smaller towns often perform better academically than those in larger towns. The data includes a variety of metrics such as population, regional classifications, coastal status, job density, income levels, university presence, and detailed educational outcomes at various stages, from Key Stage 2 through age 22.
 
-I chose to use this dataset because, upon reviewing it, I immediately envisioned the variety of compelling visuals that could be created from the rich and detailed information it contains. The diverse metrics, ranging from educational outcomes to economic factors, present numerous opportunities for insightful data visualizations.
+I chose to use this data set because, upon reviewing it, I immediately envisioned the variety of compelling visuals that could be created from the rich and detailed information it contains. The diverse metrics, ranging from educational outcomes to economic factors, present numerous opportunities for insightful data visualizations.
 
 For my analysis with this dataset, I will examine the relationship between university presence and regional differences on the number of 19-year-olds in apprenticeships. This question interests me because it combines educational infrastructure with geographic diversity, potentially revealing how the presence of universities and the specific characteristics of different regions influence the career paths young people choose. My initial thought would be that the absent of a university would push more 19-year-olds into apprenticeships due to the pursing university endeavors is an available option.  
 
 Approach:
 
-To normalize the number of 19-year-olds in apprenticeships relative to the population, I will first sum all the activities at the 19-year age column to find the total population of 19-year-olds. Next, I will calculate the percentage of 19-year-olds in apprenticeships by dividing the number of those in apprenticeships by the total 19-year-old population and multiplying by 100. This percentage will serve as our Y-axis. The X-axis will represent the presence of a university in the town, while the regions will be differentiated by distinct colors to visualize any regional variations effectively. This approach will help identify patterns and differences in apprenticeship participation across various towns and regions, considering both university presence and regional factors. This will be an effective way at looking at the information and designating if the presence of a university has any relationship with 19-year-olds in apprenticeships. The color maps will point out if regions so higher or lower numbers of apprenticeships. 
+I begin by wanting to create a simple graph to view the data. Therefore, I start with a simple geom_point plot.
+
+```{r}
+ggplot(edu_data, aes(x = university_flag, y = activity_at_age_19_appprenticeships, color = rgn11nm)) +
+  geom_point(size = 1) +
+  labs(title = "Percentage of 19-year-olds in Apprenticeships by University Presence and Region",
+       x = "University Presence",
+       y = "Percentage of Apprenticeships",
+       color = "Region") +
+  theme_minimal()
+
+```
+
+The geom_point plot gives me an idea of the data, however, there is to much going on in this visualization. I also suspect that there is a lot of hidden data due to overlap. The next approach will give us an idea of the distribution of the data. This is achieved by creating a box pot visualization of the data using geom_boxplot.
+
+```{r}
+ggplot(edu_data, aes(x = university_flag, y = activity_at_age_19_appprenticeships, fill = rgn11nm)) +
+  geom_boxplot() +
+  labs(title = "Distribution of Apprenticeships by University Presence and Region",
+       x = "University Presence",
+       y = "Percentage of Apprenticeships",
+       fill = "Region") +
+  theme_minimal()
+```
+
+This give a better representation of the data set. We can see that the median values of 19 year olds in apprenticeships is greater in towns without universities present compared to those town with universities. There is still a lot of data clustered together with this visualization so I use facet_grid to create columns by region and row by the university flag. This visualization makes easier to compare the data between all the interested variables.
+
+Discussion:
+
+Interesting discussion points that I found from visulizing the data set. The towns with the highest percentage of 19 year olds in apprenticeships is town without university in the North West region. However these town are outliers, the region with the greatest median percentage of 19 year olds in apprenticeships is the North East. Another interesting observation that I noticed was that the spread of the distributions is greater when looking at towns without university and is more consolidated in towns with universities present.
