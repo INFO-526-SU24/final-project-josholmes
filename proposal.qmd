@@ -37,10 +37,8 @@ english_education <- readr::read_csv('https://raw.githubusercontent.com/rfordata
 
 #The dataset I plan on using is from the UK office of national statistics and has data about eductation attianment based for multiple towns and cites. We can see the dimensions of the the data below as well as the name of the columns by running the below code.
 
-names(english_education)
-glimpse()
-unique(english_education$rgn11nm)
-
+english_education <- english_education |> select(activity_at_age_19_appprenticeships, rgn11nm, university_flag)
+write.csv(english_education, file = "data/edudata.csv", row.names = FALSE)
 ```
 
 A brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.
@@ -81,7 +79,7 @@ unique(english_education$university_flag)
 Plan of Attack
 
 |                                        |            |            |          |                                               |
-|----------------------------------------|------------|------------|----------|-----------------------------------------------|
+|-----------------|------------|------------|------------|---------------------|
 | Task Name                              | Status     | Due        | Priority | Summary                                       |
 | Draft Proposal For Peer Review         | Complete   | 5/25/2024  | High     | Submit Proposal                               |
 | Submit Proposal For Peer Review        | Complete   | 5/29/2024  | High     | Submit Proposal                               |
