@@ -85,6 +85,23 @@ ggplot(edu_data, aes(x = university_flag, y = activity_at_age_19_appprenticeship
 
 This give a better representation of the data set. We can see that the median values of 19 year olds in apprenticeships is greater in towns without universities present compared to those town with universities. There is still a lot of data clustered together with this visualization so I use facet_grid to create columns by region and row by the university flag. This visualization makes easier to compare the data between all the interested variables.
 
+```{r}
+ggplot(edu_data, aes(y = activity_at_age_19_appprenticeships, fill = rgn11nm)) +
+  geom_boxplot() +
+  facet_grid(vars(university_flag),vars(rgn11nm),labeller = labeller(rgn11nm = label_wrap_gen(10)))+
+  labs(title = "Distribution of Apprenticeships by University Presence and Region",
+       x = "",
+       y = "Percentage of Apprenticeships",
+       fill = "Region") +
+  theme_minimal()+
+  theme(
+    legend.position = "null",
+    axis.text.x = element_blank()
+  
+  )
+
+```
+
 Discussion:
 
 Interesting discussion points that I found from visulizing the data set. The towns with the highest percentage of 19 year olds in apprenticeships is town without university in the North West region. However these town are outliers, the region with the greatest median percentage of 19 year olds in apprenticeships is the North East. Another interesting observation that I noticed was that the spread of the distributions is greater when looking at towns without university and is more consolidated in towns with universities present.
