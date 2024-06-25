@@ -1,0 +1,6 @@
+- source: project
+  quarto-pub:
+    - id: 4f6c5bae-8985-4981-8f1e-60144cf19aab
+      url: 'https://joshdholmes.quarto.pub/project-title'
+    - id: 786e760f-14c3-4ec4-aefa-3d4530a2df76
+      url: 'https://joshdholmes.quarto.pub/project-title'

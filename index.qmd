@@ -1,11 +1,11 @@
 ---
-title: "Project Title"
+title: "Apprenticeship by Geographical Region and University Presence."
 subtitle: "INFO 526 - Summer 2024 - Final Project"
 author: 
-  - name: "Team name"
+  - name: "Joshua Holmes"
     affiliations:
       - name: "School of Information, University of Arizona"
-description: "Project description"
+description: "Final Project"
 format:
    html:
     code-tools: true

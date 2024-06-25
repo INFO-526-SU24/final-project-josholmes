@@ -2,128 +2,37 @@
   {
     "objectID": "proposal.html",
     "href": "proposal.html",
-    "title": "A look at apprenticeship obtainment and the impact of economic factors on educationial otainment",
+    "title": "Apprenticeship by Geographical Region and University Presence.",
     "section": "",
     "text": "library(tidyverse)\nlibrary(here)\nlibrary(dplyr)"
   },
   {
     "objectID": "proposal.html#dataset",
     "href": "proposal.html#dataset",
-    "title": "A look at apprenticeship obtainment and the impact of economic factors on educationial otainment",
+    "title": "Apprenticeship by Geographical Region and University Presence.",
     "section": "Dataset",
     "text": "Dataset\n\nenglish_education &lt;- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-01-23/english_education.csv')\n\n#The dataset I plan on using is from the UK office of national statistics and has data about eductation attianment based for multiple towns and cites. We can see the dimensions of the the data below as well as the name of the columns by running the below code.\n\nenglish_education &lt;- english_education |&gt; select(activity_at_age_19_appprenticeships, rgn11nm, university_flag)\nwrite.csv(english_education, file = \"data/edudata.csv\", row.names = FALSE)\n\nA brief description of your dataset including its provenance, dimensions, etc. as well as the reason why you chose this dataset.\nThe data set contains columns related to towns, town codes, town names, population, regional information, coastal classification, job density, income, university presence, and education attainment statistics. The dataset contains 1104 rows and 31 columns.\nMake sure to load the data and use inline code for some of this information."
   },
   {
     "objectID": "proposal.html#questions",
     "href": "proposal.html#questions",
-    "title": "A look at apprenticeship obtainment and the impact of economic factors on educationial otainment",
+    "title": "Apprenticeship by Geographical Region and University Presence.",
     "section": "Questions",
     "text": "Questions\nThe two questions you want to answer.\nFor my first question will be to look at the the relationship between university presence and region on the number of 19-year-old in apprenticeships.\nFor my second question I want to see if there is a relationship between higher income and job density leads to higher education scores. This would suggest that economic factors play a significant role in educational attainment. (Just noticed that only one question is required for individual teams, this question will be a backup question)\nAnalysis plan\n\nFor question one - I need to normalize the 19-year-old in Apprenticeships to the population as we would expect that towns with a higher population would have larger numbers of 19-year old. To normalize this I will sum all the activity at 19-years columns and then find the percentage of those in apprenticeships. This will be our Y-axis. Our x-axis will be if their is a university present. Then I will have the regions set colors.\n\n\n#The columns that look at ativity of 19 year olds\nenglish_education |&gt; \n  select(starts_with(\"activity\")) |&gt;\n  names()\n\n[1] \"activity_at_age_19_appprenticeships\"\n\n#Regions that we will be looking at;\nunique(english_education$rgn11nm)\n\n [1] \"East Midlands\"            \"South West\"              \n [3] \"East of England\"          \"Yorkshire and The Humber\"\n [5] \"North West\"               \"West Midlands\"           \n [7] \"South East\"               \"North East\"              \n [9] \"London\"                   NA                        \n\n#data for determine if there is a univierty present to look at if a university is present\nunique(english_education$university_flag)\n\n[1] \"No university\" \"University\"    NA             \n\n\n\nFor question two - I will created a 3D scatter plot with the following variables. X-axis will be income, Y-axis will be job Density and the Z-axis will be Education score. I will also add color to the education score to add a heat map effect to clearing distinguish where we are seeing high educational scores.\n\nPlan of Attack\n\n\n\n\n\n\n\n\n\n\nTask Name\nStatus\nDue\nPriority\nSummary\n\n\nDraft Proposal For Peer Review\nComplete\n5/25/2024\nHigh\nSubmit Proposal\n\n\nSubmit Proposal For Peer Review\nComplete\n5/29/2024\nHigh\nSubmit Proposal\n\n\nReview Peer Review Feedback\nIComplete\n5/29/2004\nHigh\nReview issues for peer reveiw\n\n\nAddress Peer Review Feedback\nComplete\n06/03/2024\nHigh\nMake changes based on peer review\n\n\nSubmbit Proposal For Instructor Review\nComplete\n06/03/2024\nHigh\nSubmit Proposal with changes from peer review\n\n\nDraft Write-Up\nIncomplete\n06/15/2024\nHigh\nGet a draft down of the write up\n\n\nFinalize Write-UP\nIncomplete\n06/24/2024\nHigh\nFinalize and submit the final write-up\n\n\nDraft Presentation\nIncomplete\n06/15/2024\nHigh\nGet a draft of the presentation\n\n\nFinalize Presentation\nIncomplete\n06/24/2024\nHigh\nFinalize and submit the presentation"
   },
   {
-    "objectID": "proposal.html#analysis-plan",
-    "href": "proposal.html#analysis-plan",
-    "title": "Proposal title",
-    "section": "Analysis plan",
-    "text": "Analysis plan\n\nA plan for answering each of the questions including the variables involved, variables to be created (if any), external data to be merged in (if any)."
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Project Title",
+    "title": "Apprenticeship by Geographical Region and University Presence.",
     "section": "",
     "text": "Add project abstract here.\nIntroduction:\nThis project utilizes the data set from the week of January 23, 2024 on the TidyTuesdayR website. This data set  focuses on the educational attainment of young people in English towns. Provided by the UK Office for National Statistics, this data set explores why children and young people in smaller towns often perform better academically than those in larger towns. The data includes a variety of metrics such as population, regional classifications, coastal status, job density, income levels, university presence, and detailed educational outcomes at various stages, from Key Stage 2 through age 22.\nI chose to use this data set because, upon reviewing it, I immediately envisioned the variety of compelling visuals that could be created from the rich and detailed information it contains. The diverse metrics, ranging from educational outcomes to economic factors, present numerous opportunities for insightful data visualizations.\nFor my analysis with this data set, I will examine the relationship between university presence and regional differences on the number of 19-year-olds in apprenticeships. This question interests me because it combines educational infrastructure with geographic diversity, potentially revealing how the presence of universities and the specific characteristics of different regions influence the career paths young people choose. My initial thought would be that the absent of a university would push more 19-year-olds into apprenticeships due to the pursing university endeavors is an available option.  \nApproach:\nI begin by wanting to create a simple graph to view the data. Therefore, I start with a simple geom_point plot.\n\n\n\n\n\n\n\n\n\nThe geom_point plot gives me an idea of the data, however, there is to much going on in this visualization. I also suspect that there is a lot of hidden data due to overlap. The next approach will give us an idea of the distribution of the data. This is achieved by creating a box pot visualization of the data using geom_boxplot.\n\n\n\n\n\n\n\n\n\nThis give a better representation of the data set. We can see that the median values of 19 year olds in apprenticeships is greater in towns without universities present compared to those town with universities. There is still a lot of data clustered together with this visualization so I use facet_grid to create columns by region and row by the university flag. This visualization makes easier to compare the data between all the interested variables.\n\n\n\n\n\n\n\n\n\nDiscussion:\nInteresting discussion points that I found from visulizing the data set. The towns with the highest percentage of 19 year olds in apprenticeships is town without university in the North West region. However these town are outliers, the region with the greatest median percentage of 19 year olds in apprenticeships is the North East. Another interesting observation that I noticed was that the spread of the distributions is greater when looking at towns without university and is more consolidated in towns with universities present."
   },
   {
     "objectID": "index.html#abstract",
     "href": "index.html#abstract",
-    "title": "Project Title",
+    "title": "Apprenticeship by Geographical Region and University Presence.",
     "section": "",
     "text": "Add project abstract here.\nIntroduction:\nThis project utilizes the data set from the week of January 23, 2024 on the TidyTuesdayR website. This data set  focuses on the educational attainment of young people in English towns. Provided by the UK Office for National Statistics, this data set explores why children and young people in smaller towns often perform better academically than those in larger towns. The data includes a variety of metrics such as population, regional classifications, coastal status, job density, income levels, university presence, and detailed educational outcomes at various stages, from Key Stage 2 through age 22.\nI chose to use this data set because, upon reviewing it, I immediately envisioned the variety of compelling visuals that could be created from the rich and detailed information it contains. The diverse metrics, ranging from educational outcomes to economic factors, present numerous opportunities for insightful data visualizations.\nFor my analysis with this data set, I will examine the relationship between university presence and regional differences on the number of 19-year-olds in apprenticeships. This question interests me because it combines educational infrastructure with geographic diversity, potentially revealing how the presence of universities and the specific characteristics of different regions influence the career paths young people choose. My initial thought would be that the absent of a university would push more 19-year-olds into apprenticeships due to the pursing university endeavors is an available option.  \nApproach:\nI begin by wanting to create a simple graph to view the data. Therefore, I start with a simple geom_point plot.\n\n\n\n\n\n\n\n\n\nThe geom_point plot gives me an idea of the data, however, there is to much going on in this visualization. I also suspect that there is a lot of hidden data due to overlap. The next approach will give us an idea of the distribution of the data. This is achieved by creating a box pot visualization of the data using geom_boxplot.\n\n\n\n\n\n\n\n\n\nThis give a better representation of the data set. We can see that the median values of 19 year olds in apprenticeships is greater in towns without universities present compared to those town with universities. There is still a lot of data clustered together with this visualization so I use facet_grid to create columns by region and row by the university flag. This visualization makes easier to compare the data between all the interested variables.\n\n\n\n\n\n\n\n\n\nDiscussion:\nInteresting discussion points that I found from visulizing the data set. The towns with the highest percentage of 19 year olds in apprenticeships is town without university in the North West region. However these town are outliers, the region with the greatest median percentage of 19 year olds in apprenticeships is the North East. Another interesting observation that I noticed was that the spread of the distributions is greater when looking at towns without university and is more consolidated in towns with universities present."
-  },
-  {
-    "objectID": "presentation.html#quarto",
-    "href": "presentation.html#quarto",
-    "title": "Apprenticeship by Geographical Region and University Presence.",
-    "section": "Quarto",
-    "text": "Quarto\n\nThe presentation is created using the Quarto CLI\n## sets the start of a new slide"
-  },
-  {
-    "objectID": "presentation.html#layouts",
-    "href": "presentation.html#layouts",
-    "title": "Apprenticeship by Geographical Region and University Presence.",
-    "section": "Layouts",
-    "text": "Layouts\nYou can use plain text\n\n\n\nor bullet points1\n\n\nor in two columns\n\n\n\nlike\nthis\n\nAnd add footnotes"
-  },
-  {
-    "objectID": "presentation.html#code",
-    "href": "presentation.html#code",
-    "title": "Apprenticeship by Geographical Region and University Presence.",
-    "section": "Code",
-    "text": "Code\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)   25.3      3.08        8.22 0.00000000358\n2 speed         -0.116    0.0642     -1.81 0.0806       \n\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    0.0983        0.0682  5.82      3.27  0.0806     1  -101.  207.  212.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;"
-  },
-  {
-    "objectID": "presentation.html#plots",
-    "href": "presentation.html#plots",
-    "title": "Apprenticeship by Geographical Region and University Presence.",
-    "section": "Plots",
-    "text": "Plots"
-  },
-  {
-    "objectID": "presentation.html#plot-and-text",
-    "href": "presentation.html#plot-and-text",
-    "title": "Apprenticeship by Geographical Region and University Presence.",
-    "section": "Plot and text",
-    "text": "Plot and text\n\n\n\nSome text\ngoes here"
-  },
-  {
-    "objectID": "presentation.html#tables",
-    "href": "presentation.html#tables",
-    "title": "Apprenticeship by Geographical Region and University Presence.",
-    "section": "Tables",
-    "text": "Tables\nIf you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\n\n\n\n\nAdelie\nTorgersen\n39.1\n18.7\n181\n3750\nmale\n\n\nAdelie\nTorgersen\n39.5\n17.4\n186\n3800\nfemale\n\n\nAdelie\nTorgersen\n40.3\n18.0\n195\n3250\nfemale\n\n\nAdelie\nTorgersen\nNA\nNA\nNA\nNA\nNA\n\n\nAdelie\nTorgersen\n36.7\n19.3\n193\n3450\nfemale\n\n\nAdelie\nTorgersen\n39.3\n20.6\n190\n3650\nmale"
-  },
-  {
-    "objectID": "presentation.html#images",
-    "href": "presentation.html#images",
-    "title": "Apprenticeship by Geographical Region and University Presence.",
-    "section": "Images",
-    "text": "Images\n\nImage credit: Danielle Navarro, Percolate."
-  },
-  {
-    "objectID": "presentation.html#math-expressions",
-    "href": "presentation.html#math-expressions",
-    "title": "Apprenticeship by Geographical Region and University Presence.",
-    "section": "Math Expressions",
-    "text": "Math Expressions\nYou can write LaTeX math expressions inside a pair of dollar signs, e.g. $\\alpha+\\beta$ renders \\(\\alpha + \\beta\\). You can use the display style with double dollar signs:\n$$\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i$$\n\\[\n\\bar{X}=\\frac{1}{n}\\sum_{i=1}^nX_i\n\\]\nLimitations:\n\nThe source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting $$ must appear in the very beginning of a line, followed immediately by a non-space character, and the ending $$ must be at the end of a line, led by a non-space character;\nThere should not be spaces after the opening $ or before the closing $."
-  },
-  {
-    "objectID": "presentation.html#feeling-adventurous",
-    "href": "presentation.html#feeling-adventurous",
-    "title": "Apprenticeship by Geographical Region and University Presence.",
-    "section": "Feeling adventurous?",
-    "text": "Feeling adventurous?\n\nYou are welcomed to use the default styling of the slides. In fact, that’s what I expect majority of you will do. You will differentiate yourself with the content of your presentation.\nBut some of you might want to play around with slide styling. Some solutions for this can be found at https://quarto.org/docs/presentations/revealjs."
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "This project was developed by [Team Name] For INFO 526 - Data Analysis and Visualization at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\nTeam member 1: One sentence description of Team member 1 (e.g., year, major, etc.).\nTeam member 2: One sentence description of Team member 2 (e.g., year, major, etc.).\nTeam member 3: One sentence description of Team member 3 (e.g., year, major, etc.).\nTeam member 4: One sentence description of Team member 4 (e.g., year, major, etc.)."
-  },
-  {
-    "objectID": "presentation.html",
-    "href": "presentation.html",
-    "title": "Project title",
-    "section": "",
-    "text": "The presentation is created using the Quarto CLI\n## sets the start of a new slide\n\n\n\n\nYou can use plain text\n\n\n\nor bullet points1\n\n\nor in two columns\n\n\n\nlike\nthis\n\n\n\n\n\n\n# A tibble: 2 × 5\n  term        estimate std.error statistic       p.value\n  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;\n1 (Intercept)   25.3      3.08        8.22 0.00000000358\n2 speed         -0.116    0.0642     -1.81 0.0806       \n\n\n# A tibble: 1 × 12\n  r.squared adj.r.squared sigma statistic p.value    df logLik   AIC   BIC\n      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1    0.0983        0.0682  5.82      3.27  0.0806     1  -101.  207.  212.\n# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSome text\ngoes here"
-  },
-  {
-    "objectID": "presentation.html#footnotes",
-    "href": "presentation.html#footnotes",
-    "title": "Project title",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nAnd add footnotes↩︎"
   },
   {
     "objectID": "presentation.html#introducing-our-data-set",
@@ -147,32 +56,11 @@
     "text": "Question\n\nHad two variables; university presence, 19 year olds in apprenticeships\nNeeded a third variable so I added in region"
   },
   {
-    "objectID": "presentation.html#region",
-    "href": "presentation.html#region",
-    "title": "How the presence of universities and impact the number of young adults in apprenticeship.",
-    "section": "Region",
-    "text": "Region\n\ncolmun name: rgn11nm\n\n\n\n [1] \"East Midlands\"            \"South West\"              \n [3] \"East of England\"          \"Yorkshire and The Humber\"\n [5] \"North West\"               \"West Midlands\"           \n [7] \"South East\"               \"North East\"              \n [9] \"London\"                   NA"
-  },
-  {
-    "objectID": "presentation.html#university",
-    "href": "presentation.html#university",
-    "title": "How the presence of universities and impact the number of young adults in apprenticeship.",
-    "section": "University",
-    "text": "University\n\ncolmun name: university_flag\n\n\n\n[1] \"No university\" \"University\"    NA"
-  },
-  {
-    "objectID": "presentation.html#year-olds-in-apprenticeships",
-    "href": "presentation.html#year-olds-in-apprenticeships",
+    "objectID": "presentation.html#data",
+    "href": "presentation.html#data",
     "title": "Apprenticeship by Geographical Region and University Presence.",
-    "section": "19 Year Olds In Apprenticeships",
-    "text": "19 Year Olds In Apprenticeships\n\ncolumn name: activity_at_age_19\nmultiple columns - Need to make sure the data is normalized based on town populations and can be compared between towns\nData is the percentage of the 2012/2013 cohort that is in apprenticeship so it is already normalized to factor for town population\n\n\n\n[1] \"activity_at_age_19_full_time_higher_education\"           \n[2] \"activity_at_age_19_sustained_further_education\"          \n[3] \"activity_at_age_19_appprenticeships\"                     \n[4] \"activity_at_age_19_employment_with_earnings_above_0\"     \n[5] \"activity_at_age_19_employment_with_earnings_above_10_000\"\n[6] \"activity_at_age_19_out_of_work\""
-  },
-  {
-    "objectID": "presentation.html#region-university-data",
-    "href": "presentation.html#region-university-data",
-    "title": "Apprenticeship by Geographical Region and University Presence.",
-    "section": "Region / University Data",
-    "text": "Region / University Data\n\ncolmun name: rgn11nm\n\n\n\n [1] \"East Midlands\"            \"South West\"              \n [3] \"East of England\"          \"Yorkshire and The Humber\"\n [5] \"North West\"               \"West Midlands\"           \n [7] \"South East\"               \"North East\"              \n [9] \"London\"                   NA                        \n\n\n\ncolmun name: university_flag\n\n\n\n[1] \"No university\" \"University\"    NA"
+    "section": "Data",
+    "text": "Data\n\ncolmun name: rgn11nm\n\n\n\n [1] \"East Midlands\"            \"South West\"              \n [3] \"East of England\"          \"Yorkshire and The Humber\"\n [5] \"North West\"               \"West Midlands\"           \n [7] \"South East\"               \"North East\"              \n [9] \"London\"                   NA                        \n\n\n\ncolmun name: university_flag\n\n\n\n[1] \"No university\" \"University\"    NA             \n\n\n\ncolumn name: activity_at_age_19\n\n\n\n num [1:1104] NA 10.04 7.74 NA 15.05 ..."
   },
   {
     "objectID": "presentation.html#organizing-data",
@@ -189,25 +77,11 @@
     "text": "Creating GGplot - geom_point"
   },
   {
-    "objectID": "presentation.html#interpenetration-of-geom_point",
-    "href": "presentation.html#interpenetration-of-geom_point",
-    "title": "Apprenticeship by Geographical Region and University Presence.",
-    "section": "Interpenetration of Geom_point",
-    "text": "Interpenetration of Geom_point\n\nLooks like there is a higher percentage of 19 years in apprenticeships in town with no university\nLooks like the North East and North West have higher numbers of aprrenticeships\nGeom_point doesn’t tell use much about the distribution so we’ll create a box pot to see the distribution"
-  },
-  {
     "objectID": "presentation.html#creating-ggplot---boxplot",
     "href": "presentation.html#creating-ggplot---boxplot",
     "title": "Apprenticeship by Geographical Region and University Presence.",
     "section": "Creating ggplot - Boxplot",
     "text": "Creating ggplot - Boxplot"
-  },
-  {
-    "objectID": "presentation.html#interpreting-the-box-plot",
-    "href": "presentation.html#interpreting-the-box-plot",
-    "title": "Apprenticeship by Geographical Region and University Presence.",
-    "section": "Interpreting the Box Plot",
-    "text": "Interpreting the Box Plot\n\nLooks like the North East and North West have higher median of 19-year olds in apprenticeships in towns without universities\nThe distributions of 19-year olds in apprenticeship is more spread out in towns with no university and more consolidated in towns with universities\nThe North West contains the town with the highest number fo 19-years old in apprenticeships but they are outliers. The median for the North West is behind the North East\nThe North East does not contain the towns with the highest percentage of 19-year olds in apprenticeships but the region has the highest median of 19 year-olds in apprenticeships for both towns with universities present and towns without universities\nA lot of data clustered together wanted to create a graph that shows the same data but not so congested together"
   },
   {
     "objectID": "presentation.html#creating-ggplot---boxplot---facet_grid",
@@ -217,17 +91,17 @@
     "text": "Creating ggplot - Boxplot - Facet_Grid"
   },
   {
-    "objectID": "presentation.html#data",
-    "href": "presentation.html#data",
-    "title": "Apprenticeship by Geographical Region and University Presence.",
-    "section": "Data",
-    "text": "Data\n\ncolmun name: rgn11nm\n\n\n\n [1] \"East Midlands\"            \"South West\"              \n [3] \"East of England\"          \"Yorkshire and The Humber\"\n [5] \"North West\"               \"West Midlands\"           \n [7] \"South East\"               \"North East\"              \n [9] \"London\"                   NA                        \n\n\n\ncolmun name: university_flag\n\n\n\n[1] \"No university\" \"University\"    NA             \n\n\n\ncolumn name: activity_at_age_19\n\n\n\n num [1:1104] NA 10.04 7.74 NA 15.05 ..."
-  },
-  {
     "objectID": "presentation.html#conclusion",
     "href": "presentation.html#conclusion",
     "title": "Apprenticeship by Geographical Region and University Presence.",
     "section": "Conclusion",
     "text": "Conclusion\n\nNorth East and North West regions have higher median of 19-year olds in apprenticeships\nThe distribution spread of 19-year olds in apprenticeship is greater in towns with no university and more consolidated in towns with universities\nThe North West contains the towns with the highest precentage of 19-years olds in apprenticeships but they are outliners.\nThe North East region has the highest median number of 19-year olds in apprenticeships"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This project was developed by [Team Name] For INFO 526 - Data Analysis and Visualization at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members.\n\nTeam member 1: One sentence description of Team member 1 (e.g., year, major, etc.).\nTeam member 2: One sentence description of Team member 2 (e.g., year, major, etc.).\nTeam member 3: One sentence description of Team member 3 (e.g., year, major, etc.).\nTeam member 4: One sentence description of Team member 4 (e.g., year, major, etc.)."
   }
 ]

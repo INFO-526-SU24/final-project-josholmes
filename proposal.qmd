@@ -1,7 +1,7 @@
 ---
-title: "A look at apprenticeship obtainment and the impact of economic factors on educationial otainment"
+title: "Apprenticeship by Geographical Region and University Presence."
 subtitle: "INFO 526 - Summer 2024 - Final Project"
-author:
+author: 
   - name: "Joshua Holmes"
     affiliations:
       - name: "School of Information, University of Arizona"

@@ -18,3 +18,5 @@
 
 
 video URL: https://arizona.hosted.panopto.com/Panopto/Pages/Viewer.aspx?id=de21b02b-db3c-47cf-ab8c-b1990069783d
+
+Website URL: https://joshdholmes.quarto.pub/project-title/
