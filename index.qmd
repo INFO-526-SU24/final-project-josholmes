@@ -57,9 +57,9 @@ edu_data <- read_csv(here("data", "edudata.csv"))
 
 ## Abstract
 
-Add project abstract here.
+This project utilizes a dataset from the TidyTuesdayR website (January 23, 2024) focusing on educational attainment in English towns, provided by the UK Office for National Statistics. It investigates why young people in smaller towns often outperform those in larger towns academically, incorporating metrics such as population, regional classifications, coastal status, job density, income levels, university presence, and educational outcomes. The analysis examines the relationship between university presence and regional differences in the number of 19-year-olds entering apprenticeships, hypothesizing that the absence of a university might lead to higher apprenticeship rates. Initial visualizations using geom_point and geom_boxplot plots reveal that towns without universities generally have higher apprenticeship rates, with significant regional variations. Key findings indicate the highest apprenticeship rates in non-university towns in the North West, while the North East shows the greatest median apprenticeship rates.
 
-Introduction:
+## Introduction
 
 This project utilizes the data set from the week of January 23, 2024 on the TidyTuesdayR website. This data set  focuses on the educational attainment of young people in English towns. Provided by the UK Office for National Statistics, this data set explores why children and young people in smaller towns often perform better academically than those in larger towns. The data includes a variety of metrics such as population, regional classifications, coastal status, job density, income levels, university presence, and detailed educational outcomes at various stages, from Key Stage 2 through age 22.
 
@@ -67,7 +67,7 @@ I chose to use this data set because, upon reviewing it, I immediately envisione
 
 For my analysis with this data set, I will examine the relationship between university presence and regional differences on the number of 19-year-olds in apprenticeships. This question interests me because it combines educational infrastructure with geographic diversity, potentially revealing how the presence of universities and the specific characteristics of different regions influence the career paths young people choose. My initial thought would be that the absent of a university would push more 19-year-olds into apprenticeships due to the pursing university endeavors is an available option.  
 
-Approach:
+## Approach
 
 I begin by wanting to create a simple graph to view the data. Therefore, I start with a simple geom_point plot.
 
@@ -113,6 +113,6 @@ ggplot(edu_data, aes(y = activity_at_age_19_appprenticeships, fill = rgn11nm)) +
 
 ```
 
-Discussion:
+## Discussion
 
 Interesting discussion points that I found from visulizing the data set. The towns with the highest percentage of 19 year olds in apprenticeships is town without university in the North West region. However these town are outliers, the region with the greatest median percentage of 19 year olds in apprenticeships is the North East. Another interesting observation that I noticed was that the spread of the distributions is greater when looking at towns without university and is more consolidated in towns with universities present.
