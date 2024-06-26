@@ -53,6 +53,8 @@ pacman::p_load(tidymodels,
 
 
 edu_data <- read_csv(here("data", "edudata.csv"))
+
+edu_data <- edu_data |> select(activity_at_age_19_appprenticeships, rgn11nm, university_flag) |> na.omit() 
 ```
 
 ## Abstract
