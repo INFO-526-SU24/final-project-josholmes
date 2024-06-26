@@ -1,7 +1,7 @@
 # Data
 -   **edudata**: Data set containing, rgn11nm, university_flag, and activity_at_19_apprenticeships. Data set is from the UK office of national statistics and has data about eductation attianment based for multiple towns and cites. Full data set can be found at this location. https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2024/2024-01-23/english_education.csv
 
-# Codebook for edudatq Dataset
+# Codebook for edudata Dataset
 
 ## Variable Names and Descriptions:
 
